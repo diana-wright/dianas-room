@@ -617,7 +617,7 @@
     //
     // Font, line-height, and color for body text, headings, and more.
 
-    // $font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; $font-family-sans-serif: $font-family-sans-serif !global; // system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    $font-family-sans-serif: 'system-ui, -apple-system, "EckScript", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'; $font-family-sans-serif: $font-family-sans-serif !global; // system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
     // $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; $font-family-monospace: $font-family-monospace !global; // SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
     // $font-family-base: var(--#{$prefix}font-sans-serif); $font-family-base: $font-family-base !global; // var(--#{$prefix}font-sans-serif)
     // $font-family-code: var(--#{$prefix}font-monospace); $font-family-code: $font-family-code !global; // var(--#{$prefix}font-monospace)

@@ -28,12 +28,12 @@
     "gulp-dart-sass": "^1.1.0",
     "gulp-nunjucks": "^6.0.0",
     "gulp-postcss": "^10.0.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "postcss": "^8.5.6",
     "postcss-uncss": "^0.17.0",
     "prettier": "3.6.2",
     "sass": "^1.89.2",
-    "surge": "^0.24.6",
+    "surge": "^0.0.0",
     "uncss": "^0.17.3"
   },
   "prettier": {
@@ -58,5 +58,9 @@
     "iOS >= 12",
     "Safari >= 12",
     "not Explorer <= 11"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1",
+    "rfs": "^10.0.0"
+  }
 }

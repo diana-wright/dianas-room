@@ -29,3 +29,5 @@ $paragraph-margin-bottom: 1.5rem;
 $gray-700: #575757; // this will affect all colors defined by $gray-700 variables
 
 $link-color: $gray-700; // you can use “Bootstrap’s” variable here, because it was defined before.
+
+$enable-negative-margins: true;

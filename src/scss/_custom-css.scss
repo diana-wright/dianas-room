@@ -1,0 +1,828 @@
+
+
+//variables
+
+//colors
+$color-logopink: #FF7EF5;
+$color-darkerpink: #f556ad;
+
+$color-purple: #a173aa; 
+
+$color-lighterblue: #515ed4;
+$color-logoblue: #192695;
+
+$color-lime: #89BA07;
+$color-darkgreen: #258500;
+$color-green: #2FB33C;
+$color-yellow: #FFE404;
+$color-darkeryellow: #e0ba0f;
+$color-orange: #FF5300;
+$color-pinkorange: #E74F57;
+$color-lightorange: #DE7D2C;
+$color-red: #FD4022;
+$color-medred: #e7391b;
+$color-darkred: #be2a13;
+
+
+@mixin parallax-bg($bg-url) {
+    color: white;
+    background-image: $bg-url;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin polkadot-bg($pat-color, $bg-color) {
+    background:
+        conic-gradient($bg-color 25%,#0000 0) 0 0/calc(2*76px) calc(76px/9.5),
+        conic-gradient($bg-color 25%,#0000 0) 0 0/calc(76px/9.5) calc(2*76px),
+        repeating-conic-gradient(#0000 0 25%,$bg-color 0 50%) 
+        76px 0 /calc(2*76px) calc(2*76px),
+        radial-gradient(50% 50%, $pat-color 98%, $bg-color) 
+        0 0/76px 76px;
+
+}
+
+@mixin zigzag-bg($color1, $color2) {
+  --s: 93px; /* control the size*/
+  --c1: $color1;
+  --c2: $color2;
+  
+background: linear-gradient(135deg, --c1 25%, transparent 25%) -43px 0, linear-gradient(225deg, --c1 25%, transparent 25%) -43px 0, linear-gradient(315deg, --c1 25%, transparent 25%), linear-gradient(45deg, --c1 25%, transparent 25%);
+background-size: 86px 86px;
+background-color: --c2;
+}
+
+//for doing outlines
+@mixin textStroke($thickness, $color) {
+    paint-order: stroke fill;
+    -webkit-text-stroke: $thickness $color;
+}
+
+//grow animation (on mouseover)
+@mixin grow($scale) {
+    -webkit-transform: scale($scale);
+    transform: scale($scale);
+}
+
+@mixin setLinkColor($link, $visited, $hover, $grow) {
+    a {
+        &:link {
+            color: $link;
+        }
+
+        &:visited {
+            color: $visited;
+        }
+
+        &:hover {
+            @include grow($grow);
+            color: $hover;
+        }
+
+        transition: 0.1s;
+    }
+}
+
+//fonts
+@font-face {
+    font-family: 'EckScript';
+    src: url('../fnt/Eckscript5fixed-Regular.woff2') format('woff2');
+    font-display: swap;
+    descent-override: 0%;
+}
+
+@font-face {
+    font-family: 'Underrated';
+    src: url('../fnt/underrated-ultrabold.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MilkyWell';
+    src: url('../fnt/MilkyWell.woff2') format('woff2');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'RetroWild';
+    src: url('../fnt/retro-wild-regular.woff2') format('woff2');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Darwin';
+    src: url('../fnt/cs-darwin-demo.regular.woff2') format('woff2');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Borensa Regular';
+    src: url('../fnt/borensa.regular.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Starbim';
+    src: url('../fnt/starbim.regular.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Mangaka';
+    src: url('../fnt/Mangaka.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Barrage';
+    src: url('../fnt/barrage-demo.regular.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Dropic';
+    src: url('../fnt/dropic.regular.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+
+@font-face {
+    font-family: 'Chick';
+    src: url('../fnt/chick.woff') format('woff');
+    font-display: swap;
+    descent-override: 30%;
+}
+header {
+    h1 {
+        font-family: 'Eckscript';
+    }
+}
+
+/*INDEX*/
+
+body, div, main, section, article {
+    box-sizing: border-box;
+    font-family: 'Eckscript', sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+.contentOutline {
+        clip-path: polygon(0 81.84px,60px 60px,81.84px 0,calc(100% - 81.84px) 0,calc(100% - 60px) 60px,100% 81.84px,100% calc(100% - 81.84px),calc(100% - 60px) calc(100% - 60px),calc(100% - 81.84px) 100%,81.84px 100%,60px calc(100% - 60px),0 calc(100% - 81.84px));
+
+        mask: conic-gradient(from -70deg at bottom,#0000,#000 1deg 139deg,#0000 140deg) 50%/87.92px 100.4%;
+}
+
+.copyLinkBack {
+    &:hover { //change mouse to pointer when over a copyLinkBack
+            cursor: pointer;
+        }
+}
+
+#siteWideFooter {
+        color: white;
+
+        a {
+            
+            text-decoration: none;
+
+            h2 {
+                font-family: 'Underrated';
+
+                font-size: 110%;
+
+                @include media-breakpoint-up(md) {
+                    font-size: 200%;
+                };
+            }
+        }
+    }
+
+//header navbar
+header {
+    a {
+    text-decoration: none;
+    }
+
+    font-family: 'Underrated';
+    
+    font-size: 60%;
+
+    @include media-breakpoint-up(md) {
+        font-size: 150%;
+    };
+}
+
+//class for page specific navigation colors
+.nav-index {
+@include setLinkColor($color-darkerpink, $color-darkerpink, white, 1.05 )
+}
+
+// INDEX PAGE
+#index {
+    background-color: $color-logoblue;
+    .container {
+        @include polkadot-bg($color-darkerpink, $color-logopink);
+
+        max-width: 990px; //max width
+    }
+
+    color: white; //text color
+
+    // position: relative;
+
+        #dianacenter {
+        color: $color-logoblue;
+
+        .dianaHeart {
+            width: 80%; /* adjust to control the size */
+            aspect-ratio: 1;
+            --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+            -webkit-mask-box-image: var(--_m);
+            mask-border: var(--_m);
+            clip-path: polygon(-41% 0,50% 91%, 141% 0);
+            background: $color-logoblue;
+            }
+            /* fallback until better support for mask-border */
+            @supports not (-webkit-mask-box-image: var(--_m)) { 
+            .contactMe {
+                mask:
+                radial-gradient(at 70% 31%,#000 29%,#0000 30%),
+                radial-gradient(at 30% 31%,#000 29%,#0000 30%),
+                conic-gradient(#000 0 0) bottom/100% 50% no-repeat;
+            }
+        }
+
+        .dianaHeartBorder {
+            width: 100%; /* adjust to control the size */
+
+            @include media-breakpoint-up(sm) {
+                width: 95%;
+            }; //set size to bigger so text fits better in it
+
+            aspect-ratio: 1;
+            --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+            -webkit-mask-box-image: var(--_m);
+            mask-border: var(--_m);
+            clip-path: polygon(-41% 0,50% 91%, 141% 0);
+            background: $color-logopink;
+            }
+            /* fallback until better support for mask-border */
+            @supports not (-webkit-mask-box-image: var(--_m)) { 
+            .contactMeBorder {
+                mask:
+                radial-gradient(at 70% 31%,#000 29%,#0000 30%),
+                radial-gradient(at 30% 31%,#000 29%,#0000 30%),
+                conic-gradient(#000 0 0) bottom/100% 50% no-repeat;
+            }
+        }
+
+        //speech bubble
+
+        #dianabubble {
+            border: 5px solid $color-logoblue;
+            border-radius: 100px;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+            position:relative;
+            background-color: $color-logopink;
+        }
+
+        .triangle:before {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid transparent;
+            border-bottom: 15px solid $color-logoblue;
+            right: 46%;
+            top: -26px;
+        }
+
+        .triangle:after {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 5px solid transparent;
+            border-bottom: 15px solid $color-logopink;
+            right: 46%;
+            top: -15px;
+        }
+    }
+
+    //CONTACT ME 
+    #contactMe {
+    * {
+            font-family: 'Underrated', sans-serif;
+        }
+
+        h4 { //text size
+            font-size: 60%;
+
+            @include media-breakpoint-up(md) {
+                font-size: 110%;
+            };
+
+            @include textStroke(0.4em, $color-darkred );
+            }
+
+        h1 { //envelope size
+            font-size: 130%;
+
+            @include media-breakpoint-up(md) {
+                font-size: 160%;
+            };
+
+            @include textStroke(0.2em, $color-darkred );
+        }
+
+        a {
+                color: white;
+                text-decoration: none;
+            }
+    }
+
+    .contactMe {
+        width: 90%; /* adjust to control the size */
+        aspect-ratio: 1;
+        --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+        -webkit-mask-box-image: var(--_m);
+        mask-border: var(--_m);
+        clip-path: polygon(-41% 0,50% 91%, 141% 0);
+        background: $color-red;
+        }
+        /* fallback until better support for mask-border */
+        @supports not (-webkit-mask-box-image: var(--_m)) { 
+        .contactMe {
+            mask:
+            radial-gradient(at 70% 31%,#000 29%,#0000 30%),
+            radial-gradient(at 30% 31%,#000 29%,#0000 30%),
+            conic-gradient(#000 0 0) bottom/100% 50% no-repeat;
+        }
+    }
+
+    .contactMeBorder {
+        width: 100%; /* adjust to control the size */
+
+        @include media-breakpoint-up(sm) {
+            width: 95%;
+        }; //set size to bigger so text fits better in it
+
+        aspect-ratio: 1;
+        --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+        -webkit-mask-box-image: var(--_m);
+        mask-border: var(--_m);
+        clip-path: polygon(-41% 0,50% 91%, 141% 0);
+        background: $color-darkred;
+        }
+        /* fallback until better support for mask-border */
+        @supports not (-webkit-mask-box-image: var(--_m)) { 
+        .contactMeBorder {
+            mask:
+            radial-gradient(at 70% 31%,#000 29%,#0000 30%),
+            radial-gradient(at 30% 31%,#000 29%,#0000 30%),
+            conic-gradient(#000 0 0) bottom/100% 50% no-repeat;
+        }
+    }
+
+    //PATREON
+    #dianaFunClub {
+        background-color: $color-logoblue;
+        border: .4em solid $color-lighterblue;
+        border-radius: 100%;
+
+        font-family: 'MilkyWell', sans-serif;
+        
+
+        a {
+            color: #FFFFFF;
+            text-decoration: none;
+            @include textStroke(0.3em, $color-lighterblue);
+        }
+
+        h4 {
+            font-size: 100%;
+
+            @include media-breakpoint-up(md) {
+                font-size: 130%;
+            };
+        }
+    }
+
+    #socials {
+
+        h1 {
+            @include textStroke(0.3em, $color-lime );
+            font-family: 'RetroWild', sans-serif;
+            
+            font-size: 140%;
+
+            @include media-breakpoint-up(md) {
+                font-size: 170%;
+            };
+
+
+            &:hover { //prevent text highlighter
+                cursor: default;
+            }
+        }
+
+        #socialsIcons {
+            font-size: 20px;
+            word-spacing: -0.6rem;
+            @include textStroke(0.3em, $color-lime );
+
+            a {
+                color: white;
+            }
+
+            i { //elements already have a growMouseover class but this makes them a bit bigger
+                &:hover {
+                @include grow(1.40);
+                }
+            }
+
+        }
+    }
+
+    .growMouseover {
+        &:hover {
+                @include grow(1.05);
+            }
+        //hover grow transition
+        transition: 0.2s;
+    }
+
+    .rotateHueMouseover {
+        &:hover {
+            filter: hue-rotate(-60deg);
+        }
+
+        transition: 0.1s;
+    }
+
+    .socialsFlower {
+        width: 90%; /* adjust to control the size */
+        aspect-ratio: 1;
+        --g:/33.334% 33.334% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+        mask: 93.301% 75% var(--g),50% 100% var(--g),6.699% 75% var(--g),6.699% 25% var(--g),50% 0% var(--g),93.301% 25% var(--g),radial-gradient(100% 100%,#000 28.868%,#0000 calc(28.868% + 1px));
+
+        background-color: $color-yellow;
+    }
+
+    .socialsFlowerBorder {
+        width: 110%; /* adjust to control the size */
+
+        @include media-breakpoint-up(sm) {
+            width: 90%;
+        }; //set size to bigger so text fits better in it
+
+        aspect-ratio: 1;
+        --g:/33.334% 33.334% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+        mask: 93.301% 75% var(--g),50% 100% var(--g),6.699% 75% var(--g),6.699% 25% var(--g),50% 0% var(--g),93.301% 25% var(--g),radial-gradient(100% 100%,#000 28.868%,#0000 calc(28.868% + 1px));
+        background-color: #000;
+
+        background-color: $color-lime;
+    }
+    
+    //MUSIC
+    #music {
+    p {
+        font-family: 'Dropic';
+        @include textStroke(0.15em, $color-purple );
+
+        font-size: 550%;
+        line-height: 0.7;
+
+        &:hover { //prevent text highlighter
+                cursor: default;
+            }
+        }
+    }
+
+    //VIDEOS
+    #latestVideo {
+        background: $color-green;
+        border: 6px solid $color-darkgreen;
+
+        font-family: 'Darwin', sans-serif;
+        @include textStroke(0.5em, $color-darkgreen );
+        
+        h2 {
+            &:hover { //prevent text highlighter
+                cursor: default;
+            }
+        }
+
+        #tvButtons {
+
+            border: 4px solid $color-darkgreen;
+
+            button {
+                background: white;
+                width: 35px;
+                aspect-ratio: 1;
+
+                border: 4px solid $color-darkgreen;
+
+                &:hover {
+                @include grow(1.20);
+                }
+            //hover grow transition
+            transition: 0.2;
+            }
+        }
+
+
+
+        #latestVideoScreen {
+            iframe {
+                border: 6px solid $color-darkgreen;
+                width: 100%;
+                max-width: 240px;
+                aspect-ratio: 16 / 9.3;
+            }
+        }
+    }
+
+    #friends {
+        background: $color-darkerpink;
+        color: white;
+        mask: conic-gradient(from 110deg at top,#0000,#000 1deg 139deg,#0000 140deg) 50%/5.49em 100.1%;
+
+        a {
+            &:hover {
+            filter: hue-rotate(-90deg);
+        }
+
+        transition: 0.1s;
+        }
+    }
+}
+
+// GUESTBOOK
+
+.nav-guestbook {
+    @include setLinkColor($color-yellow, $color-yellow, white, 1.05 )
+}
+
+#guestbook {
+    background-color: $color-lighterblue;
+
+    h1 {
+        font-family: 'Chick';
+        font-size: 300%;
+        line-height: 0.5;
+        padding-top: 1%;
+    }
+    
+    .container {
+        //zigzag bg
+        background: linear-gradient(135deg, #ffe404 25%, transparent 25%) -43px 0, linear-gradient(225deg, #ffe404 25%, transparent 25%) -43px 0, linear-gradient(315deg, #ffe404 25%, transparent 25%), linear-gradient(45deg, #ffe404 25%, transparent 25%);
+        background-size: 86px 86px;
+        background-color: #e0ba0f;
+
+        max-width: 990px; //max width
+    }
+
+    color: white; //text color
+
+    #atabook {
+        width: 100%; /* adjust to control the size */
+
+        height: 100%;
+    }
+
+    #atabookDiv {
+        min-height: 80vh;
+    }
+}
+
+// CABINET INDEX
+
+.nav-cabinet {
+    @include setLinkColor($color-lime, $color-lime, white, 1.05)
+}
+
+#cabinet {
+    background-color: $color-purple;
+    color: white;
+    
+    .container {
+        background-image: repeating-conic-gradient(#258500 0% 25%, #89ba07 0% 50%);
+        background-position: 0 0, 55px 55px;
+        background-size: 110px 110px;
+        background-color: #89ba07;
+        max-width: 990px; //max width
+    }
+
+    h1, h3 {
+        font-family: 'Borensa Regular';
+    }
+
+    .cabinet-text {
+        border: 12px solid $color-lime;
+        background-color: $color-darkgreen;
+
+        max-width: 100%;
+        font-size: 100%;
+
+        @include media-breakpoint-up(md) {
+            max-width: 90%;
+            font-size: 110%;
+        };
+
+        p { //space between paragraphs
+            margin-bottom: 1em;
+        }
+
+        ul { //remove unordered list styling
+        list-style-type: none;
+        margin-bottom: 1em;
+        padding: 0;
+
+        @include setLinkColor($color-lime, $color-lime, white, 1.05);
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    }
+}
+
+.nav-cabinet-wallpapers {
+    @include setLinkColor($color-darkeryellow, $color-darkeryellow, white, 0)
+}
+
+#cabinet-wallpapers {
+
+        h1 {
+        font-family:  'Times New Roman', sans-serif;
+    }
+    
+    background-color: $color-logoblue;
+    color: white;
+
+    .container {
+        background-image: url("/img/bg/gainax1.gif");
+        /*background-size: contain, cover;*/
+        background-attachment: fixed;
+        /* cursor:url(/img/cursor/eddy.png), auto; */
+
+        max-width: 990px; //max width
+
+    .wallpapers-content {
+        background-image: url("/img/bg/gainax2.gif");
+        background-attachment: fixed;
+        color: rgb(255, 255, 255);
+        width: 95%;
+        margin: auto;
+        padding: 1px 15px;
+        outline: 3px solid rgb(197, 15, 15);
+
+        font-family: 'Times New Roman', sans-serif;
+        font-size: 16px;
+
+        .imglink2 {
+            max-width: 230px;
+        }
+
+        h1, p, h2, strong{
+        font-family:  'Times New Roman', sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+    }
+}
+
+img.imglink2 {
+    filter: none; /* IE5+ */
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+
+img.imglink2:hover {
+    filter:saturate(9);
+    -webkit-transform: scale(1.20);
+    transform: scale(1.20);
+    }
+}
+
+// URUSEI YATSURA WATCH GUIDE
+
+.nav-cabinet-lumwatchguide {
+    @include setLinkColor($color-medred, $color-medred, white, 1.05);
+}
+
+#cabinet-lumwatchguide {
+    background-color: $color-lighterblue;
+    color: white;
+
+    :target {
+    
+        scroll-margin-top: 90px; //compensate for sticky header
+    }
+    
+    .container {
+        background:
+            conic-gradient(from 162deg at calc(74px * .5)  calc(74px * .68), #e0ba0f 36deg, #0000 0),
+            conic-gradient(from 18deg  at calc(74px * .19) calc(74px * .59), #e0ba0f 36deg, #0000 0),
+            conic-gradient(from 306deg at calc(74px * .81) calc(74px * .59), #e0ba0f 36deg, #0000 0),
+            #ffe404;
+        background-position: 0 calc(74px * 0.35);
+        background-size: calc(74px + 3px) calc(74px + 3px);
+
+        max-width: 990px; //max width
+    }
+
+    h1, h3, h4 {
+        font-family: 'Starbim';
+        color: $color-medred;
+        
+        @include textStroke(8px, white)
+    }
+
+    h1 {
+        font-size: 200%;
+    }
+
+    h3 {
+        font-size: 150%;
+    }
+
+    .lumwatchguide-text {
+
+        border: 12px solid $color-lighterblue;
+        background-color: $color-lighterblue;
+
+        max-width: 100%;
+        font-size: 100%;
+
+        @include media-breakpoint-up(md) {
+            max-width: 90%;
+            font-size: 130%;
+        };
+
+        p, ul, ol { //space between paragraphs
+            margin-bottom: 1em;
+            font-family: 'Mangaka', sans-serif;
+        }
+
+        ul { //remove unordered list styling
+        list-style-type: none;
+        margin-bottom: 1em;
+        padding: 0;
+    }
+
+    #contents {
+        background-color: $color-lighterblue;
+
+        p {
+            font-size: 90%;
+        }
+    }
+
+    .lum-starep {
+        color: $color-yellow;
+    }
+
+    .lum-movie {
+        color: $color-red
+    }
+
+    .lum-pink {
+        color: $color-logopink;
+
+        @include setLinkColor($color-logopink, $color-logopink, white, 0)
+    }
+
+    @include setLinkColor($color-darkeryellow, $color-darkeryellow, white, 1.05);
+
+    }
+}

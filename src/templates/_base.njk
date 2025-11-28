@@ -2,17 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- icon -->
+    <link rel="icon" href="/img/dianaicon.png">
+
     <link rel="stylesheet" href="/index.css" />
+    <script src="https://kit.fontawesome.com/daf9da9989.js" crossorigin="anonymous"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
-{% block content %}{% endblock %}
+<header class="text-center nav-{{pageId}} mb-1 py-0">
+    {% if pageId !== "index" %}
+        <h1 class="mt-1">Diana's Room</h1>
+        {% include "_nav.njk" %}
+    {% endif %}
+</header>
+
+{# dynamically change style based on page id #}
+<body {% if pageId %} id="{{ pageId }}"{% endif %}> 
+    <div class="container w-100 contentOutline">
+    {% block content %}{% endblock %}
+    </div>
+</body>
 {#
 <!-- Optional JavaScript -->
 <!-- Bootstrap JS first and your own script at the end -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="js/custom.js"></script>
 #}
-</body>
+<script src="js/custom.js"></script>
+<footer>
+    {# unique footer for when its the index #}
+    {% if pageId == "index" %}
+        {% include "_footer-index.njk" %}
+    {% else %}
+        {# conditional nav color depending on page id. set nav colors as a class in sass #}
+        <div id="siteWideFooter" class="container-fluid w-100 position-absolute nav-{{pageId}} mt-2">
+        {% include "_nav.njk" %}
+        {% include "_copyright.njk" %}
+        </div>
+    {% endif %}
+</footer>
+
 </html>

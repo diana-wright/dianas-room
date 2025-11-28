@@ -1,0 +1,13 @@
+{% extends '_base.njk' %}
+
+{% block title %}Diana's Guestbook{% endblock %}
+
+{% set pageId = "guestbook" %}
+
+{% block content %}
+    <div class="row text-center d-flex">
+        <div class="col-12 mx-auto justify-content-center mx-auto d-block" id="atabookDiv">
+            <iframe src="https://dianasroom.atabook.org" id="atabook" allowTransparency="true"></iframe>
+        </div>
+    </div>
+{% endblock %}

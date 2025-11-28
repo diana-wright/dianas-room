@@ -1,0 +1,28 @@
+{% extends '_base.njk' %}
+
+{% block title %}Diana's Cabinet{% endblock %}
+
+{% set pageId = "cabinet" %}
+
+{% block content %}
+    <div class="row text-center d-flex p-5">
+        <div class="col-12 mx-auto justify-content-center mx-auto d-block cabinet-text rounded-4 p-1">
+            <h1>Diana's Cabinet</h1>
+            <p>"Buy, buy", says the sign in the shop window. "Why, why?" says the junk in the yard.</p>
+
+            {# <h3>Here</h3> #}
+            <div class="px-5">
+                <ul class="text-start">
+                    <li><a href="/cabinet/wallpapers">(3/29/2023) Cool Anime Wallpapers For Your Computer</a></li>
+                    <li><a href="/cabinet/lumwatchguide">(6/15/2023) An Urusei Yatsura Watch Guide</a></li>
+                    {# <li>Tractron 2020</li> #}
+                </ul>
+            </div>
+
+            {# <h3>Elsewhere</h3>
+            <ul>
+                <li><a href="https://rarebit.neocities.org">Rarebit Open Source Webcomic Template</a></li>
+            </ul> #}
+        </div>
+    </div>
+{% endblock %}
